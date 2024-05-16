@@ -16,6 +16,13 @@
 					<div class="card-body">
 						<p class="fs-4 text-center">Registration Page</p>
 						
+						<% String msg=(String)session.getAttribute("success"); 
+						    if(msg!=null){%>
+						    	<p class="text-center text-success fs-4"><%= msg%></p>
+						 <% 
+						 session.removeAttribute("success");
+						    }
+						%>
 						<form action="register" method="post">
 							<div class="mb-3">
 								<label class="form-label">Name</label> <input name="name"

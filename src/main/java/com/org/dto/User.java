@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -11,25 +15,29 @@ import lombok.Setter;
 
 @Setter
 @Getter
+@Entity
 public class User {
-
-	@Column(name="user_Id")
+     
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	
 	private int Id;
 	
-	@Column(name="user_Name")
+	
 	private String Name;
 	
-	@Column(name="user_Age")
+	
 	private int Age;
 	
-	@Column(name="user_Mobile")
+	
 	private long Mobile;
 	
-	@Column(name="user_Email")
+
 	private String Email;
 	
-	@Column(name="user_password")
+	
 	private String Password;
+	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	private List<Notes>notes;
 }

@@ -1,21 +1,31 @@
 package com.org.dto;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+ @Setter
+ @Getter
+ @Entity
 public class Notes {
-
-	@Column(name="note_Id")
+	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private int Id;
 	
-	@Column(name="note_Title")
+	
 	private String Title;
 	
-	@Column(name="note_Description")
+	
 	private String Description;
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn
 	private User user;
 }
