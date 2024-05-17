@@ -17,12 +17,13 @@ public class Notes {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	@Column(name="note_Id")
 	private int Id;
 	
-	
+	@Column(name="user_title")
 	private String Title;
 	
-	
+	@Column(name="note_description")
 	private String Description;
 	
 	@ManyToOne

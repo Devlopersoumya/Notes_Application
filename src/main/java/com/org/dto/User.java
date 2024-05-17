@@ -20,22 +20,22 @@ public class User {
      
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	
+	@Column(name="user_Id")
 	private int Id;
 	
-	
+	@Column(name="user_name")
 	private String Name;
 	
-	
+	@Column(name="user_age")
 	private int Age;
 	
-	
+	@Column(name="user_mobile")
 	private long Mobile;
 	
-
+	@Column(name="user_email")
 	private String Email;
 	
-	
+	@Column(name="user_password")
 	private String Password;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
