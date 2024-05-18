@@ -26,12 +26,13 @@ public class UserDao {
 	
 	}
 	
-	public User FetchAllUser() {
+	public List<User> FetchAllUser() {
 		
 		Query query = em.createNamedQuery("select s from User s");
 		List<User> list = query.getResultList();
 	
-		return null;
+		
+		return list;
 	}
 	public User fetchUserByEmailAndPassword(String email,String pwd) {
 		Query query = em.createQuery("select s from User s where s.Email=?1 and s.Password=?2");

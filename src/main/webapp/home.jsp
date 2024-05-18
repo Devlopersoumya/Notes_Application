@@ -1,3 +1,5 @@
+<%@page import="com.org.dto.Notes"%>
+<%@page import="java.util.List"%>
 <%@page import="com.org.dto.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,6 +9,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="components/bootstrapCss.jsp" %>
+<style type="text/css">
+.paint-card {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+</style>
 </head>
 <body>
 <%User user=(User)session.getAttribute("userobj"); 
@@ -16,41 +23,46 @@
 %>
 
 <%@ include file="components/homenavbare.jsp" %>
-<h3 style="text-align: center; color:green"> Welcome to Home page</h3>
+<h3 style="text-align: center; color:green"> welcome to Home page</h3>
 
-<div class="container-fluid p-3">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card paint-card">
-					<div class="card-body">
-						<p class="fs-3 text-center">User Details</p>
-						<a href="#" class="text-decoration-none btn btn-primary">Add
-							User</a>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Age</th>
-									<th>Email</th>
-									<th>Mobile</th>
-									<th>Action</th>
-								</tr>
-								
-
-							</thead>
-							<tbody>
-						</table>
-
-					</div>
-				</div>
-
-
-			</div>
-
-		</div>
-
-
-	</div>
+  <% String addnotemsg=(String)session.getAttribute("addnotemsg"); 
+    if(addnotemsg!=null){%>
+		<p class="text-center text-success fs-4"><%= addnotemsg%></p>
+	 <% 
+	 session.removeAttribute("addnotemsg");
+						    }
+	%>
+	<% User u=(User)session.getAttribute("userobj"); 
+	   List<Notes> list= u.getNotes();
+	%>
+<div class="container border">
+  <div>
+  <a href="add_note.jsp" class="btn btn-sm btn-primary">Add Note</a>
+  </div>
+</div>
+<div class="row">
+   <% for(Notes n:list){
+	   %>
+	   
+	   <div class="col-md-4 card border border-primary m-4" style="width:15em;" > 
+	       <div class="card-body">
+	       
+	       <div class="d-flex flex-wrap justly-content-evenly">
+	       <div>
+	         <h2 class="text-success card-title"><%=n.getTitle() %></h2>
+	         <a href="#" class="btn btn-sm btn-info">view</a>
+	         <a href="#" class="btn btn-sm btn-info">update</a>
+	         <a href="#" class="btn btn-sm btn-info">delete</a>
+	         </div>
+	       </div>
+	       
+	       </div>
+	   </div>
+	   <% 
+   }
+	   %>
+   
+</div>
 <%} %>
 </body>
 </html>
