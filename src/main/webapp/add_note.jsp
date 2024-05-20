@@ -37,7 +37,7 @@
 								<label class="form-label">Description</label>
 								<textarea rows="10" cols="46" class="form-control" name="description"></textarea>	
 							</div>
-							<button type="submit" class="btn bg-primary text-white col-md-12">Add Notes</button>
+							<button type="submit" class="btn bg-primary text-white col-md-12">Add </button>
 						</form>
 					</div>
 				</div>

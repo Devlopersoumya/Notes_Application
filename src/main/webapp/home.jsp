@@ -1,3 +1,4 @@
+<%@page import="com.org.dao.UserDao"%>
 <%@page import="com.org.dto.Notes"%>
 <%@page import="java.util.List"%>
 <%@page import="com.org.dto.User"%>
@@ -32,14 +33,17 @@
 	 session.removeAttribute("addnotemsg");
 						    }
 	%>
-	<% User u=(User)session.getAttribute("userobj"); 
+	<% 
+	    int id=user.getId();
+	    UserDao dao=new UserDao();
+	    User u=dao.FetchUserById(id);
 	   List<Notes> list= u.getNotes();
 	%>
 <div class="container border">
   <div>
   <a href="add_note.jsp" class="btn btn-sm btn-primary">Add Note</a>
   </div>
-</div>
+
 <div class="row">
    <% for(Notes n:list){
 	   %>
@@ -50,9 +54,9 @@
 	       <div class="d-flex flex-wrap justly-content-evenly">
 	       <div>
 	         <h2 class="text-success card-title"><%=n.getTitle() %></h2>
-	         <a href="#" class="btn btn-sm btn-info">view</a>
-	         <a href="#" class="btn btn-sm btn-info">update</a>
-	         <a href="#" class="btn btn-sm btn-info">delete</a>
+	         <a href="view_note.jsp?id=<%=n.getId()%>" class="btn btn-sm btn-info">view</a>
+	         <a href="view_note.jsp?id=<%=n.getId()%>" class="btn btn-sm btn-info">update</a>
+	         <a href="delete?id=<%=n.getId()%>" class="btn btn-sm btn-info">delete</a>
 	         </div>
 	       </div>
 	       
@@ -61,7 +65,7 @@
 	   <% 
    }
 	   %>
-   
+   </div>
 </div>
 <%} %>
 </body>
