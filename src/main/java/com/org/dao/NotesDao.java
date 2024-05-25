@@ -1,11 +1,14 @@
 package com.org.dao;
  
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import com.org.dto.Notes;
+import com.org.dto.User;
 
 public class NotesDao {
 
@@ -18,19 +21,25 @@ public class NotesDao {
 		Notes note=em.find(Notes.class,id);
 		return note;
 	}
-	public void updateNotesById(Notes notes) {
-		
-		
-		et.begin();
-		em.merge(notes);
-		et.commit();
-	}
+	
 	
 	public void deleteById(int id) {
 		
 		Notes note = em.find(Notes.class,id);
 		
+		User user = note.getUser();
+		
+		List<Notes> list = user.getNotes();
+		
+		  for(Notes n:list) {
+			  if(n.getId()==id) {
+				  list.remove(n);
+				  break;
+			  }
+		  }
+		
 		et.begin();
+		em.merge(user);
 		em.remove(note);
 		et.commit();
 	}
